@@ -1,4 +1,26 @@
 import json
+import platform
+import sys
+import psutil
+
+def print_system_info():
+    print("Systeminformationen:")
+    print(f"System: {platform.system()}")
+    print(f"Version: {platform.version()}")
+    print(f"Rechnername: {platform.node()}")
+    print(f"Prozessor: {platform.processor()}")
+    print(f"Architektur: {platform.architecture()[0]}")
+    print(f"Python-Version: {sys.version}")
+    print(f"Python-Implementierung: {platform.python_implementation()}")
+    disk_usage = psutil.disk_usage('/')
+    total_gb = disk_usage.total / (1024 ** 3)
+    used_gb = disk_usage.used / (1024 ** 3)
+    free_gb = disk_usage.free / (1024 ** 3)
+    print(f"Gesamtspeicher: {total_gb:.2f} GB")
+    print(f"Verwendet: {used_gb:.2f} GB")
+    print(f"Frei: {free_gb:.2f} GB")
+    print(f"Prozent genutzt: {disk_usage.percent}%")
+    print("-" * 30)
 
 def create_quiz():
     quiz = []
@@ -34,6 +56,7 @@ def play_quiz():
         print(f"Datei {filename} nicht gefunden.")
 
 def main():
+    print_system_info()  # Systeminformationen ausgeben
     while True:
         print("\n1. Quiz erstellen")
         print("2. Quiz spielen")
